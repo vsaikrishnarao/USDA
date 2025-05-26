@@ -1,7 +1,7 @@
 package com.example.updated_test.controller;
 
-import com.example.updated_test.model.User;
-import com.example.updated_test.repository.UserRepository;
+import com.example.updated_test.model.UserInfo;
+import com.example.updated_test.repository.UserInfoRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -10,20 +10,20 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = "*")
-public class UserController {
+public class UserInfoController {
 
-    private final UserRepository userRepository;
+    private final UserInfoRepository userInfoRepository;
 
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserInfoController(UserInfoRepository userInfoRepository) {
+        this.userInfoRepository = userInfoRepository;
     }
 
-    @PostMapping("/login")
+    @PostMapping("/userlogin")
     public Map<String, Object> login(@RequestParam String username,
                                      @RequestParam String password) {
         Map<String, Object> response = new HashMap<>();
 
-        User user = userRepository.findByUsername(username);
+        UserInfo user = userInfoRepository.findById(username).orElse(null);
 
         if (user == null) {
             response.put("success", false);
@@ -42,27 +42,27 @@ public class UserController {
         return response;
     }
 
-
-
-
-
-
-    @PostMapping("/users")
-    public Map<String, Object> addUser(@RequestBody User newUser) {
+    @PostMapping("/newusers")
+    public Map<String, Object> addUser(@RequestBody UserInfo newUser) {
         Map<String, Object> response = new HashMap<>();
 
-        // Check if user already exists
-        if (userRepository.findByUsername(newUser.getUsername()) != null) {
+        // Check for duplicate username
+        if (userInfoRepository.existsByUsername(newUser.getUsername())) {
             response.put("success", false);
             response.put("message", "Username already exists");
             return response;
         }
 
-        // Save the new user
-        userRepository.save(newUser);
+        // Check for duplicate email
+        if (userInfoRepository.findByEmail(newUser.getEmail()) != null) {
+            response.put("success", false);
+            response.put("message", "Email already exists");
+            return response;
+        }
+
+        userInfoRepository.save(newUser);
         response.put("success", true);
         response.put("message", "User registered successfully");
         return response;
     }
-
 }
