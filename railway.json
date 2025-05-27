@@ -1,0 +1,4 @@
+{
+  "buildCommand": "rm -r src/main/resources/static/* && rm -r src/frontend/dist && cd src/frontend && npm install && npm run build && cd ../.. && cp -r src/frontend/dist/* src/main/resources/static/ && mvn clean package",
+  "startCommand": "java -jar target/*.jar"
+}
