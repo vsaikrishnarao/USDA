@@ -1,4 +1,0 @@
-{
-  "buildCommand": "cd src/frontend && npm run build --max_old_space_size=512 && cd ../.. && rm -rf src/main/resources/static/* && cp -r src/frontend/dist/* src/main/resources/static/ && mvn clean package -DskipTests -T 1",
-  "startCommand": "java -Xmx256m -XX:+UseSerialGC -jar target/*.jar"
-}
