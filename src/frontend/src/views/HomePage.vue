@@ -17,6 +17,7 @@ import ViewClass from "../views/ViewClass.vue";
 import ViewGroup from "../views/ViewGroup.vue";
 import ViewLmu from "../views/ViewLmu.vue";
 import AddUser from "../views/AddUser.vue";
+import DisplayUsers from "../views/DisplayUsers.vue";
 
 export default {
   name: "HomePage",
@@ -26,7 +27,8 @@ export default {
     ViewClass,
     ViewGroup,
     ViewLmu,
-    AddUser
+    AddUser,
+    DisplayUsers
   },
   data() {
     return {
@@ -44,6 +46,8 @@ export default {
           return "ViewLmu";
         case "addUser":
           return "AddUser";
+        case "displayUsers":
+          return "DisplayUsers";
         default:
           return "MapView";
       }
