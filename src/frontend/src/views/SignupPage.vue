@@ -18,7 +18,7 @@
 
       <!-- UID Verification Section -->
       <div v-if="form.isAdminString === 'true'">
-        <input v-model="adminUID" type="text" placeholder="Enter UID" required />
+        <input v-model="adminUID" type="password" placeholder="Enter UID" required />
 
         <button
             type="button"
