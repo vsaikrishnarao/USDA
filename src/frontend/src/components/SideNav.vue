@@ -44,6 +44,14 @@
             </span>
           </a>
         </li>
+        <li class="menu-item">
+          <a href="#" @click="displayUsers">
+            <span class="icon-text">
+              <i class="fa fa-map"></i>
+              <span class="link-text">Users</span>
+            </span>
+          </a>
+        </li>
       </template>
 
       <!-- Always show Sign Out -->
@@ -82,6 +90,9 @@ export default {
     },
     addUser() {
       this.$emit("changeView","addUser");
+    },
+    displayUsers() {
+      this.$emit("changeView","displayUsers");
     },
     logout() {
       sessionStorage.clear();
